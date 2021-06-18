@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Menu </title>
+		<style>
+			h1{
+				text-align: center;
+				font-size: 50px;
+				font-family: garamond;
+			}
+		</style>
+		<script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+		<script>
+			function start(){
+				sjs.open("target",900,600);
+
+				var background = new sjs.Image("Images/pongmainmenu.png");
+					background.setSize(sjs.getWidth(), sjs.getHeight());
+
+				var menu_text = new sjs.Text("Doom Pong",55, "red");
+					menu_text.centerH().offset(0, 70);
+
+				var game_text = new sjs.Text("Use the Arrow Keys to Control the Knights. Don't let The Blade get past you!",28,"#ff0");
+					game_text.centerH().offset(0, 240);
+
+				var startBtn = new sjs.Button("Start", function(){
+					window.location = "pong.html";
+					});
+
+				startBtn.center();
+
+				var info_text = new sjs.Text("Created By The Spastic Creator", 20, "black");
+					info_text.bottom().centerH().offset(0, -35);
+
+
+			} //end start
+		</script>
+	</head>
+	<body onload="start()">
+		<h1> Menu </h1>
+
+		<div id="target" style="margin:auto;background: url('pongmainmenu.png');"></div>
+	</body>
+</html>
