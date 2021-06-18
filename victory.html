@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Light Victory </title>
+			<script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+			<script>
+				function start(){
+					sjs.open("target",900,600);
+
+						/*//Background
+							var background = new sjs.Image("Images/.png");
+								background.setSize(sjs.getWidth(), sjs.getHeight());
+								url('.png'); <- insert into the div tag*/
+
+						//Game Over Message
+
+							var gameover_text = new sjs.Text("Red Knight Won!", 55, "red");
+								gameover_text.centerH().offset(0, 70);
+
+						//Restart Button
+
+							var restartBtn = new sjs.Button("Replay?", function(){
+								window.location = "index.html";
+								});
+								restartBtn.center();
+
+			} //end start
+		</script>
+	</head>
+	<body onload="start()">
+		<h1> Game Over! </h1>
+
+		<div id="target" style="margin:auto;background:#1e4614"></div> 
+	</body>
+</html>

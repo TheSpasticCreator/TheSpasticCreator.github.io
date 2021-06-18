@@ -1,0 +1,96 @@
+<html>
+	<head>
+		<title> Doom Pong </title>
+		<script src="https://simplycodingcourses.com/files/simplyjs/simply.js"></script>
+		<script>
+			function start(){
+				sjs.open("target",900,600); //On run [insert] happens
+
+				//Background
+					var background = new sjs.Image("Images/PixelForest.png");
+						background.setSize(sjs.getWidth(), sjs.getHeight());
+
+				//Ball Object and Properties
+					var ball = new sjs.Image("Images/BladedBoomerangGif.gif");
+						ball.type = "ball";
+						ball.setSize(64,64);
+						ball.center();
+						ball.friction = -0.0001;
+						ball.pushUp(4);
+						ball.pushRight(2);
+						ball.bounce();
+
+				//Paddle Object and Properties
+					var paddle1 = new sjs.Image("Images/DarkKnight.png");
+						paddle1.type = "paddle";
+						paddle1.centerH().offset(0,60);
+						paddle1.setSize(88,48);
+
+					var paddle2 = new sjs.Image("Images/Knight.png.png");
+						paddle2.type = "paddle";
+						paddle2.center().bottom().offset(0,-110);
+						paddle2.setSize(88,48);
+
+				//Townspeople Object and Properties
+					var banner1 = new sjs.Image("Images/banner-dark.png");
+						banner1.type = "ehealth";
+						banner1.centerH();
+						banner1.setSize(1000,50);
+
+					var banner2 = new sjs.Image("Images/banner-light.png");
+						banner2.type = "phealth";
+						banner2.center().bottom().offset(0,-50);
+						banner2.setSize(1000,50);
+
+				//Scoring system
+					var enemyhp = 1612;
+					var score_txt = new sjs.Text("Health Left: 1612", 21, "purple");
+						score_txt.offset(5, 60);
+
+					var playerhp = 2604;
+					var php_txt = new sjs.Text("Health Left: 2604", 21, "red");
+						php_txt.bottom().offset(5, -70)
+
+
+				//Keybindings
+					sjs.keyDown(RIGHT_KEY, function(){
+						paddle1.pushRight();
+						paddle2.pushRight();
+						});
+					sjs.keyDown(LEFT_KEY, function(){
+						paddle1.pushLeft();
+						paddle2.pushLeft();
+						});
+
+				//Sounds
+					var soundEffect = new Audio('Music/techno.mp3');
+
+				//Collisions
+					sjs.onHit("ball","paddle", function(ball,paddle){
+						soundEffect.play();
+						sjs.bounceOff(ball,paddle);
+					});
+					sjs.onHit("ball","ehealth", function(ball,ehealth){
+						enemyhp = enemyhp - 13;
+						score_txt.setText("Health Left: " + enemyhp);
+						if (enemyhp == 0) {window.location = "victory.html"};
+						sjs.bounceOff(ball,ehealth);
+					});
+
+					sjs.onHit("ball","phealth", function(ball,phealth){
+						playerhp = playerhp - 21;
+						php_txt.setText("Health Left: " + playerhp);
+						if (playerhp == 0) {window.location = "gameover.html"};
+						sjs.bounceOff(ball,phealth);
+					});
+
+				//Game Over or Victory
+
+			}//Closes the "Start" function
+		</script>
+	</head>
+	<body onload="start()">
+		<h1 style="text-align:center;"> Doom Pong </h1>
+		<div id="target" style="margin:auto;background: url('PixelForest.png');"></div>
+	</body>
+</html>
